@@ -7,6 +7,11 @@ const userSchema = new Schema({
     userName: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    role: {
+        type: String,
+        enum: ['patient', 'admin']
+    },
+    contactDetails: { type: String },
     termsAndCondition: { type: Boolean }
 }, {
     timestamps: true
@@ -15,3 +20,4 @@ const userSchema = new Schema({
 userSchema.plugin(toJSON);
 
 export const userModel = model("User", userSchema);
+export default userModel;

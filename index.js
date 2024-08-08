@@ -1,11 +1,15 @@
 import express from "express";
 import { dbconnection } from "./config/db.js";
 import {userRouter} from "./routes/user_routes.js";
+import adminRouter from "./routes/Admin_route.js";
+import DoctorRouter from "./routes/Doctors_routes.js";
+import appointmentRouter from "./routes/appointment_routes.js";
 import mongoose from "mongoose";
 import session from "express-session";
 import cors from "cors";
 import expressOasGenerator from "@mickeymond/express-oas-generator";
 import MongoStore from "connect-mongo";
+
 
 
 const app = express();
@@ -38,6 +42,11 @@ expressOasGenerator.handleResponses(app,{
 dbconnection();
 
 app.use(userRouter);
+app.use(adminRouter);
+app.use(DoctorRouter);
+app.use(appointmentRouter);
+
+
 
 
 app.listen(3200, ()=>

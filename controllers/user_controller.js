@@ -2,6 +2,7 @@ import { userModel } from "../models/user_model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { userSchema, loginValidator } from "../schema/user_schema.js";
+import HealthRecordModel from "../models/healthRecord_models.js";
 
 // User Signup
 export const signup = async (req, res, next) => {
@@ -43,7 +44,7 @@ export const login = async (req, res, next) => {
         const user = await userModel.findOne({
             $or: [
                 { email: email },
-                { username: username },
+                { userName: username },
             ]
         });
 
@@ -80,3 +81,15 @@ export const logout = async (req, res, next) => {
         next(error);
     }
 };
+
+
+export const getHealthRecords = async (req, res) => {
+    try {
+      const healthRecords = await HealthRecordModel.find({ userId: req.params.userId });
+      if (!healthRecords) return res.status(404).send('Health records not found');
+      res.send(healthRecords);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  };
+
