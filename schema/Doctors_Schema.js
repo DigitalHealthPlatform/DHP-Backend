@@ -1,14 +1,3 @@
-// import Joi from 'joi';
-
-// const doctorSchema = Joi.object({
-//   name: Joi.string().required(),
-//   specialty: Joi.string().required(),
-//   availability: Joi.boolean(),
-//   contactDetails: Joi.string().required(),
-// });
-
-// export default doctorSchema;
-
 import Joi from 'joi';
 
 export const doctorSchema = Joi.object({

@@ -3,6 +3,7 @@ import { doctorSchema } from "../schema/Doctors_schema.js";
 
 
 
+
 export const addDoctor = async (req, res) => {
   try {
     const { error } = doctorSchema.validate(req.body);
