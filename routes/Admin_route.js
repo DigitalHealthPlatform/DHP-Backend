@@ -3,7 +3,7 @@ import { addDoctor, assignDoctor, requestConsultation } from '../controllers/adm
 
 const adminRouter = Router();
 
-adminRouter.post('/add/doctor', addDoctor);
+adminRouter.post('/admin/add/doctor', addDoctor);
 adminRouter.patch('/assign/doctor/:id', assignDoctor);
 adminRouter.post('/request/consultation/:id', requestConsultation);
 

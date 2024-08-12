@@ -16,9 +16,8 @@ export const doctorSchema = Joi.object({
   specialty: Joi.string().min(3).max(50).required(),
   availability: Joi.boolean().optional(),
   contactDetails: Joi.object({
-    phone: Joi.string().optional(),
-    email: Joi.string().email().optional(),
-  }).optional(),
-  // Add additional fields as needed
+    phone: Joi.string(),
+    email: Joi.string().email().required(),
+  }).required(),
 });
 

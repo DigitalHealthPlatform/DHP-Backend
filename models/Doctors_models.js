@@ -18,7 +18,6 @@ const doctorSchema = new Schema({
     phone: String,
     email: String
   },
-  // Additional fields as required
 });
 
   
