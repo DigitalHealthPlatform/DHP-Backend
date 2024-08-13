@@ -9,11 +9,19 @@ import session from "express-session";
 import cors from "cors";
 import expressOasGenerator from "@mickeymond/express-oas-generator";
 import MongoStore from "connect-mongo";
-import { setupSwaggerDocs } from "./swagger.js";
+
 
 
 
 const app = express();
+
+dbconnection();
+
+expressOasGenerator.handleResponses(app,{
+    alwaysServeDocs: true,
+    tags: ["auth", "users", "admin", "appointment"],
+    mongooseModels: mongoose.modelNames(),
+});
 
 app.use(cors({credentials: true, origin: '*'}));
 app.use(express.json());
@@ -33,26 +41,20 @@ app.use(session({
 })
 );
 
-app.get("/api-docs/health", (req, res) => {
-    res.json({ status: "UP" });
-  });
 
 
-expressOasGenerator.handleResponses(app,{
-    alwaysServeDocs: true,
-    tags: ["auth"],
-    mongooseModels: mongoose.modelNames(),
-});
 
 
-dbconnection();
+
+
 
 app.use('/api-docs',userRouter);
 app.use( '/api-docs',  adminRouter);
 app.use( '/api-docs' , DoctorRouter);
 app.use( '/api-docs',  appointmentRouter);
 
-setupSwaggerDocs(app);
+expressOasGenerator.handleRequests();
+app.use((req,res) => res.redirect("/api-docs"));
 
 
 

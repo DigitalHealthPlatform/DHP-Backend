@@ -3,9 +3,9 @@ import { scheduleAppointment, getPatientAppointments, getDoctorAppointments, upd
 
 const appointmentRouter = Router();
 
-appointmentRouter.post('/schedule', scheduleAppointment);
-appointmentRouter.get('/patient/:patientId', getPatientAppointments);
-appointmentRouter.get('/doctor/:doctorId', getDoctorAppointments);
-appointmentRouter.patch('/status/:id', updateAppointmentStatus);
+appointmentRouter.post('/appointment/schedule', scheduleAppointment);
+appointmentRouter.get('/appointment/patient/:patientId', getPatientAppointments);
+appointmentRouter.get('/appointment/doctor/:doctorId', getDoctorAppointments);
+appointmentRouter.patch('/appointment/status/:id', updateAppointmentStatus);
 
 export default appointmentRouter;
