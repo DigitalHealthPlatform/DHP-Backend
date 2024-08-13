@@ -9,6 +9,7 @@ import session from "express-session";
 import cors from "cors";
 import expressOasGenerator from "@mickeymond/express-oas-generator";
 import MongoStore from "connect-mongo";
+import { setupSwaggerDocs } from "./swagger.js";
 
 
 
@@ -51,6 +52,7 @@ app.use( '/api-docs',  adminRouter);
 app.use( '/api-docs' , DoctorRouter);
 app.use( '/api-docs',  appointmentRouter);
 
+setupSwaggerDocs(app);
 
 
 
