@@ -30,7 +30,12 @@ app.use(session({
 })
 
 })
-)
+);
+
+app.get("/api-docs/health", (req, res) => {
+    res.json({ status: "UP" });
+  });
+
 
 expressOasGenerator.handleResponses(app,{
     alwaysServeDocs: true,
@@ -41,10 +46,10 @@ expressOasGenerator.handleResponses(app,{
 
 dbconnection();
 
-app.use(userRouter);
-app.use(adminRouter);
-app.use(DoctorRouter);
-app.use(appointmentRouter);
+app.use('/api-docs',userRouter);
+app.use( '/api-docs',  adminRouter);
+app.use( '/api-docs' , DoctorRouter);
+app.use( '/api-docs',  appointmentRouter);
 
 
 
