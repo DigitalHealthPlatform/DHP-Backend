@@ -1,5 +1,5 @@
 import DoctorModel from "../models/Doctors_models.js";
-import { doctorSchema } from "../schema/Doctors_schema.js";
+import { doctorSchema } from "../schema/doctor_Schema.js";
 import AdminModel from "../models/admin_model.js";
 import { adminSignupSchema } from "../schema/Admin_schema.js";
 import bcrypt from "bcrypt";

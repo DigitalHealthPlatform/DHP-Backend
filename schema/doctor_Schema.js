@@ -10,3 +10,4 @@ export const doctorSchema = Joi.object({
   }).required(),
 });
 
+export default doctorSchema;
