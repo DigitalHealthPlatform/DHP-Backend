@@ -21,7 +21,7 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Your API Documentation',
+            title: 'DHP API Documentation',
             version: '1.0.0',
         },
         servers: [
@@ -30,7 +30,7 @@ const options = {
             },
         ],
     },
-    apis: ['./routes/*.js'], // Adjust this to the path of your route files
+    apis: ['./routes/*.js'], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -38,12 +38,6 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 dbconnection();
-
-expressOasGenerator.handleResponses(app,{
-    alwaysServeDocs: true,
-    tags: ["auth", "users", "admin", "appointment"],
-    mongooseModels: mongoose.modelNames(),
-});
 
 app.use(cors({credentials: true, origin: '*'}));
 app.use(express.json());
@@ -70,10 +64,22 @@ app.use(session({
 
 
 
+
+
+
+
 app.use('/api-docs',userRouter);
 app.use( '/api-docs',  adminRouter);
 app.use( '/api-docs' , DoctorRouter);
 app.use( '/api-docs',  appointmentRouter);
+
+app.use('/', (req, res)=> res.redirect("/api-docs"));
+
+expressOasGenerator.handleResponses(app,{
+    alwaysServeDocs: true,
+    tags: ["auth", "users", "admin", "appointment"],
+    mongooseModels: mongoose.modelNames(),
+});
 
 expressOasGenerator.handleRequests();
 app.use((req,res) => res.redirect("/api-docs"));
