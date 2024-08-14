@@ -30,7 +30,7 @@ const options = {
             },
         ],
     },
-    apis: ['./routes/*.js'], 
+    apis: ['./routes/*_routes.js'], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -68,21 +68,21 @@ app.use(session({
 
 
 
-app.use('/api-docs',userRouter);
-app.use( '/api-docs',  adminRouter);
-app.use( '/api-docs' , DoctorRouter);
-app.use( '/api-docs',  appointmentRouter);
+app.use('/api',userRouter);
+app.use( '/api',  adminRouter);
+app.use( '/api' , DoctorRouter);
+app.use( '/api',  appointmentRouter);
 
 app.use('/', (req, res)=> res.redirect("/api-docs"));
 
-expressOasGenerator.handleResponses(app,{
-    alwaysServeDocs: true,
-    tags: ["auth", "users", "admin", "appointment"],
-    mongooseModels: mongoose.modelNames(),
-});
+// expressOasGenerator.handleResponses(app,{
+//     alwaysServeDocs: true,
+//     tags: ["auth", "users", "admin", "appointment"],
+//     mongooseModels: mongoose.modelNames(),
+// });
 
-expressOasGenerator.handleRequests();
-app.use((req,res) => res.redirect("/api-docs"));
+// expressOasGenerator.handleRequests();
+// app.use((req,res) => res.redirect("/api-docs"));
 
 
 
