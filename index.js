@@ -17,28 +17,28 @@ import swaggerUi from "swagger-ui-express";
 
 const app = express();
 
-const options = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'DHP API Documentation',
-            version: '1.0.0',
-        },
-        servers: [
-            {
-                url: process.env.BASE_URL || 'http://localhost:3200',
-            },
-        ],
-    },
-    apis: ['./routes/*_routes.js'], 
-};
+// const options = {
+//     definition: {
+//         openapi: '3.0.0',
+//         info: {
+//             title: 'DHP API Documentation',
+//             version: '1.0.0',
+//         },
+//         servers: [
+//             {
+//                 url: process.env.BASE_URL || 'http://localhost:3200',
+//             },
+//         ],
+//     },
+//     apis: ['./routes/*_routes.js'], 
+// };
 
-const swaggerSpec = swaggerJSDoc(options);
+// const swaggerSpec = swaggerJSDoc(options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-dbconnection();
 
+// Applying middlware
 app.use(cors({credentials: true, origin: '*'}));
 app.use(express.json());
 
@@ -57,10 +57,14 @@ app.use(session({
 })
 );
 
+expressOasGenerator.handleResponses(app,{
+    alwaysServeDocs: true,
+    tags: ["auth", "user", "admin", "appointment", "Doctor"],
+    mongooseModels: mongoose.modelNames(),
+});
 
 
-
-
+dbconnection();
 
 
 
@@ -75,14 +79,10 @@ app.use( '/api',  appointmentRouter);
 
 app.use('/', (req, res)=> res.redirect("/api-docs"));
 
-// expressOasGenerator.handleResponses(app,{
-//     alwaysServeDocs: true,
-//     tags: ["auth", "users", "admin", "appointment"],
-//     mongooseModels: mongoose.modelNames(),
-// });
 
-// expressOasGenerator.handleRequests();
-// app.use((req,res) => res.redirect("/api-docs"));
+
+expressOasGenerator.handleRequests();
+app.use((req,res) => res.redirect("/api-docs"));
 
 
 
