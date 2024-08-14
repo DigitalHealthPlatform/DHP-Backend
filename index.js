@@ -9,11 +9,33 @@ import session from "express-session";
 import cors from "cors";
 import expressOasGenerator from "express-oas-generator";
 import MongoStore from "connect-mongo";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 
 
 
 const app = express();
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Your API Documentation',
+            version: '1.0.0',
+        },
+        servers: [
+            {
+                url: process.env.BASE_URL || 'http://localhost:3200',
+            },
+        ],
+    },
+    apis: ['./routes/*.js'], // Adjust this to the path of your route files
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 dbconnection();
 
