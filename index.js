@@ -7,7 +7,7 @@ import appointmentRouter from "./routes/appointment_routes.js";
 import mongoose from "mongoose";
 import session from "express-session";
 import cors from "cors";
-import expressOasGenerator from "@mickeymond/express-oas-generator";
+import expressOasGenerator from "express-oas-generator";
 import MongoStore from "connect-mongo";
 
 

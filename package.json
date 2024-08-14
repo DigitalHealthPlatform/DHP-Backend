@@ -1,6 +1,17 @@
 {
+  "name": "dhp-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --env-file=.env index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-    "@mickeymond/express-oas-generator": "^1.0.47",
     "@reis/mongoose-to-json": "^3.0.0",
     "axios": "^1.7.3",
     "bcrypt": "^5.1.1",
@@ -8,6 +19,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-oas-generator": "^1.0.46",
     "express-session": "^1.18.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
@@ -17,17 +29,5 @@
     "multer-savefilesorg": "^1.0.2",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4"
-  },
-  "name": "dhp-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon --env-file=.env index.js",
-    "start": "node index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
